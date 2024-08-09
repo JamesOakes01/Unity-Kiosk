@@ -27,8 +27,10 @@ class KioskApp(tk.Tk):
                 shortcut = shell.CreateShortCut(shortcut_path)
                 program_path = shortcut.Targetpath
 
+                # Use the shortcut's name (without the .lnk extension)
+                shortcut_name = os.path.splitext(shortcut_file)[0]
+
                 program_folder = os.path.dirname(program_path)
-                program_name = os.path.splitext(os.path.basename(program_path))[0]
                 cover_image_path = os.path.join(program_folder, "cover.jpg")
                 description_path = os.path.join(program_folder, "description.txt")
 
@@ -44,7 +46,7 @@ class KioskApp(tk.Tk):
                     description = "No description available."
 
                 programs.append({
-                    "name": program_name,
+                    "name": shortcut_name,  # Use the shortcut name instead of the program name
                     "path": program_path,
                     "cover_image": cover_image,
                     "description": description,
@@ -88,7 +90,6 @@ class KioskApp(tk.Tk):
             os.startfile(program_path)
         except Exception as e:
             print(f"Failed to open {program_path}: {e}")
-
 
 if __name__ == "__main__":
     app = KioskApp()
