@@ -12,10 +12,15 @@ class KioskApp(tk.Tk):
         super().__init__()
 
         self.title("Program Kiosk")
-        self.geometry("800x600")
+        self.attributes('-fullscreen', True)  # Enable full-screen mode
+
+        self.bind("<Home>", self.exit_fullscreen)  # Bind the Escape key to exit full-screen
 
         self.programs = self.load_programs()
         self.display_programs()
+
+    def exit_fullscreen(self, event=None):
+        self.attributes('-fullscreen', False)
 
     def load_programs(self):
         programs = []
