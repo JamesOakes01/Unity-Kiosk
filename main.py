@@ -83,7 +83,12 @@ class KioskApp(tk.Tk):
         open_button.pack(side=tk.RIGHT)
 
     def open_program(self, program_path):
-        os.startfile(program_path)
+        print(f"Attempting to open: {program_path}")  # Debugging line
+        try:
+            os.startfile(program_path)
+        except Exception as e:
+            print(f"Failed to open {program_path}: {e}")
+
 
 if __name__ == "__main__":
     app = KioskApp()
